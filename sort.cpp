@@ -40,26 +40,32 @@ int main(int argc, char* argv[]) {
     }
     else rewindDelay = std::stoll(line.substr(n+14));
   }
-  std::cout << rwDelay << ' ' << moveDelay << ' ' << rewindDelay << '\n';  
-  // TapeSorter object
-  TapeSorter ts = TapeSorter(argv[1],argv[2],rwDelay,moveDelay,rewindDelay);
-  // imbuing hexadecimal output for integers
-  std::cout << std::hex;
-  // Initial tape
-  Tape input = Tape(argv[1],rwDelay,moveDelay,rewindDelay);
-  bool flag = true;
-  std::cout << "Initial array:\n";
-  input.rewind();
-  while (flag) {
-    std::cout << input.read() << '\n';
-    flag = input.moveForward();
+  std::cout << rwDelay << ' ' << moveDelay << ' ' << rewindDelay << '\n';
+  // Tests for file existence
+  try {
+    Tape input = Tape(argv[1],rwDelay,moveDelay,rewindDelay);  // input wrapper for input tape
+    Tape output = Tape(argv[2],rwDelay,moveDelay,rewindDelay); // outside wraper for output tape
+    // TapeSorter object
+    TapeSorter ts = TapeSorter(argv[1],argv[2],rwDelay,moveDelay,rewindDelay);
+    // imbuing hexadecimal output for integers
+    std::cout << std::hex;
+    // Initial tape
+    bool flag = true;
+    std::cout << "Initial array:\n";
+    input.rewind();
+    while (flag) {
+      std::cout << input.read() << '\n';
+      flag = input.moveForward();
+    }
+    ts.sort();
+    flag = true;
+    output.rewind();
+    while (flag) {
+      std::cout << output.read() << '\n';
+      flag = output.moveForward();
+    }
   }
-  ts.sort();
-  Tape output = Tape(argv[2],rwDelay,moveDelay,rewindDelay); // outside wraper for output tape
-  flag = true;
-  output.rewind();
-  while (flag) {
-    std::cout << output.read() << '\n';
-    flag = output.moveForward();
+  catch (FileAccessError e) {
+    std::cout << e.what() << ' ' << "Input or Output does not exist\n";
   }
 }
