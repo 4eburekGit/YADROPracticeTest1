@@ -1,0 +1,3 @@
+rwDelay = 10
+moveDelay = 50
+rewindDelay = 1000
