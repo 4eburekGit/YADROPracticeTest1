@@ -2,6 +2,7 @@
 YADRO practice test task 1
 
 Задание 1 из теста на стажировку в YADRO
+
 Реализовано:
  -  Класс Tape - обёртка для файлового потока ввода-вывода из текстового файла,
     обеспечивает перемещение по потоку в 2 направлениях и возможность
@@ -20,7 +21,8 @@ YADRO practice test task 1
 main() для сортировки  лежит в sort.cpp, собиралось во время тестирования с использованием g++
 Быстрый запуск с файлами input.txt и output.txt
 
-$ g++ -o app sort.cpp Tape.hpp Tape.cpp TapeExcept.hpp Tapeort.hpp TapeSort.cpp
+$ g++ -o app sort.cpp Tape.hpp Tape.cpp TapeExcept.hpp TapeSort.hpp TapeSort.cpp
+
 $ ./app input.txt output.txt
 
 main() для тестирования основных функций лежит в test.cpp, к нему прилагаются файлы

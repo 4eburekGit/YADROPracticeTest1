@@ -43,9 +43,20 @@ int main(int argc, char* argv[]) {
   std::cout << rwDelay << ' ' << moveDelay << ' ' << rewindDelay << '\n';  
   // TapeSorter object
   TapeSorter ts = TapeSorter(argv[1],argv[2],rwDelay,moveDelay,rewindDelay);
-  ts.sort();
-  Tape output = Tape(argv[2],rwDelay,moveDelay,rewindDelay); // outsie wraper for output tape
+  // imbuing hexadecimal output for integers
+  std::cout << std::hex;
+  // Initial tape
+  Tape input = Tape(argv[1],rwDelay,moveDelay,rewindDelay);
   bool flag = true;
+  std::cout << "Initial array:\n";
+  input.rewind();
+  while (flag) {
+    std::cout << input.read() << '\n';
+    flag = input.moveForward();
+  }
+  ts.sort();
+  Tape output = Tape(argv[2],rwDelay,moveDelay,rewindDelay); // outside wraper for output tape
+  flag = true;
   output.rewind();
   while (flag) {
     std::cout << output.read() << '\n';
